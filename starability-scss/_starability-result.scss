@@ -20,13 +20,21 @@
   @while $star-count-result > 0 {
     $star-number: $star-count-result;
 
+    // Ganze Sterne
     &[data-rating="#{$star-number}"]::after {
       width: $star-number * $star-size;
     }
 
+    // Halbe Sterne
+    $half-star-number: $star-number - 0.5;
+
+    &[data-rating="#{$half-star-number}"]::after {
+      width: ($star-number - 1) * $star-size + ($star-size / 2);
+    }
+
     $star-count-result: $star-count-result - 1;
   }
-  
+
   @media screen and (min-resolution: 192dpi) {
     background-image: $img-stars-sprite-2x;
     background-size: $star-size auto;

@@ -1,9 +1,8 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
 var cssnano = require('gulp-cssnano');
-var runSequence = require('run-sequence');
 
 gulp.task('output-css', function() {
   return gulp.src('starability-scss/**/*.scss')
@@ -26,8 +25,4 @@ gulp.task('watch', function() {
   gulp.watch('starability-scss/**/*.scss', ['output-css']);
 });
 
-gulp.task('default', function(callback) {
-  runSequence(['output-css', 'watch'],
-    callback
-  );
-});
+gulp.task('default',  gulp.series('output-css'));
